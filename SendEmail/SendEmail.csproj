@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Settings\AppSettings30.cs" />
+    <Compile Remove="Settings\UserSettings30.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\UtilityLibrary\UtilityLibrary\CsExtensions.cs" Link=".Linked\CsExtensions.cs" />
+    <Compile Include="..\..\UtilityLibrary\UtilityLibrary\CsUtilities.cs" Link=".Linked\CsUtilities.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include=".Linked\" />
+    <Folder Include="Settings\" />
+  </ItemGroup>
+
+</Project>
