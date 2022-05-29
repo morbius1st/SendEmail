@@ -33,20 +33,13 @@ namespace SendEmail
 				sb.Append("User Domain Name | ").AppendLine(System.Environment.UserDomainName);
 				sb.Append("Current Directory | ").AppendLine(System.Environment.CurrentDirectory);
 
-
-
-
-
 			}
 			catch 
 			{
 				Console.WriteLine("exception: using"+ System.Environment.UserName);
 				throw;
 			}
-
 		}
-
-
 
 		private static void TestMail()
 		{
@@ -59,47 +52,6 @@ namespace SendEmail
 			var host = to.Host;
 			var port = smtp.Port;
 			Console.WriteLine("{0}:{1}", host, port);
-		}
-
-
-		private static void SendMailBySystemNetMail()
-		{
-			// does not work
-			string file =
-				"D:\\Users\\Jeff\\Documents\\Programming\\VisualStudioProjects\\SendEmail\\SendEmail\\TextFile.txt";
-			// Create a message and set up the recipients.
-			MailMessage message = new MailMessage(
-				"jeff.stuyvesant@cyberstudio.pro",
-				"jeff.stuyvesant@cyberstudio.pro",
-				"Quarterly data report.",
-				"See the attached spreadsheet.");
-
-			// Create  the file attachment for this e-mail message.
-			Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
-			// Add time stamp information for the file.
-			ContentDisposition disposition = data.ContentDisposition;
-			disposition.CreationDate = System.IO.File.GetCreationTime(file);
-			disposition.ModificationDate = System.IO.File.GetLastWriteTime(file);
-			disposition.ReadDate = System.IO.File.GetLastAccessTime(file);
-			// Add the file attachment to this e-mail message.
-			message.Attachments.Add(data);
-
-			//Send the message.
-			SmtpClient client = new SmtpClient("smtp-mail.outlook.com");
-			// Add credentials if the SMTP server requires them.
-			client.Credentials = CredentialCache.DefaultNetworkCredentials;
-
-			try
-			{
-				client.Send(message);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
-					ex.ToString() );
-			}
-
-			data.Dispose();
 		}
 
 
@@ -145,6 +97,52 @@ namespace SendEmail
 			myprocess.Start();
 
 		}
+
+
+
+		// other tests
+
+		private static void SendMailBySystemNetMail()
+		{
+			// does not work
+			string file =
+				"D:\\Users\\Jeff\\Documents\\Programming\\VisualStudioProjects\\SendEmail\\SendEmail\\TextFile.txt";
+			// Create a message and set up the recipients.
+			MailMessage message = new MailMessage(
+				"jeff.stuyvesant@cyberstudio.pro",
+				"jeff.stuyvesant@cyberstudio.pro",
+				"Quarterly data report.",
+				"See the attached spreadsheet.");
+
+			// Create  the file attachment for this e-mail message.
+			Attachment data = new Attachment(file, MediaTypeNames.Application.Octet);
+			// Add time stamp information for the file.
+			ContentDisposition disposition = data.ContentDisposition;
+			disposition.CreationDate = System.IO.File.GetCreationTime(file);
+			disposition.ModificationDate = System.IO.File.GetLastWriteTime(file);
+			disposition.ReadDate = System.IO.File.GetLastAccessTime(file);
+			// Add the file attachment to this e-mail message.
+			message.Attachments.Add(data);
+
+			//Send the message.
+			SmtpClient client = new SmtpClient("smtp-mail.outlook.com");
+			// Add credentials if the SMTP server requires them.
+			client.Credentials = CredentialCache.DefaultNetworkCredentials;
+
+			try
+			{
+				client.Send(message);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
+					ex.ToString() );
+			}
+
+			data.Dispose();
+		}
+
+
 		
 		private static void SendMailByMyProcess2()
 		{
